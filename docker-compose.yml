@@ -1,0 +1,22 @@
+web:
+ image: nginx
+ ports:
+      - '8080:80'
+ volumes:
+      - ./code:/code
+      - ./site.conf:/etc/nginx/conf.d/site.conf
+ links:
+      - php
+php:
+    image: php:7-fpm
+    volumes:
+      - ./code:/code
+
+db:
+    image: mysql
+    ports:
+      - '3306:3306'
+    environment:
+        MYSQL_DATABASE: test
+        MYSQL_ROOT_PASSWORD: toor
+
